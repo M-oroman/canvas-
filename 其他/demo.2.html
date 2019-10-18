@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no"/>
+    <meta http-equiv="pragma" content="no-cache"/>
+    <meta http-equiv="expires" content="Wed, 26 Feb 1997 08:21:57 GMT" />
+    <meta http-equiv="Cache-Control" content="no-cache,must-revalidate" />
+    <meta name="format-detection" content="telephone=no"/>
+    <meta http-equiv="Access-Control-Allow-Origin" content="*" />
+    <script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #myShare .tc-content{
+            width: 240px;
+            height: 280px;
+            background: #fff;
+            position: fixed;
+            top: 0;
+            left: 0;
+            text-align: center;
+            background: url(./timg.jpg) no-repeat;
+        }
+        #myShare .tc-head{
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            /* overflow: hidden; */
+            /* background: #f2f2f2; */
+            position: absolute;
+            left: 50%;
+            margin-left: -24px;
+            top: 9px;
+            z-index: 111;
+        }
+        #myShare .tc-head img{
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+        }
+        #myShare .tc-content h3{
+            font-size: 13.5px;
+            color: #323232;
+            margin-top:60px;
+            margin-bottom: 6px;
+        }
+        #myShare .tc-content p{
+            font-size: 12px;
+            color: #5c5b5a; 
+        }
+        #myShare .tc-content .tc-code{
+            width: 90px;
+            height: 90px;
+            background: #bf7839;
+            margin-top: 21px;
+            margin-bottom: 9px;
+            position: absolute;
+            left: 50%;
+            margin-left: -45px;
+            top: 99px;
+            z-index: 111;
+        }
+        #myShare .tc-content .tc-code img{
+            width: 100%;
+            height: 100%;
+        }
+        #myShare .tc-content b{
+            font-size: 13.5px;
+            color: #414141;
+            margin-top: 120px;
+            display: block;
+        }
+        #myShare .tc-content span{
+            font-size: 13.5px;
+            color: #e41c1c;
+        }
+        /* #myShare .tc-content .bjhead{
+            width: 240px;
+            height: 280px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+        #myShare .tc-content .bjhead img{
+            width: 100%;
+            height: 100%;
+        } */
+        /* canvas{                
+            margin-top: 282px;
+            margin-right: 0;
+            margin-left: 0;
+        } */
+        button#b {
+            margin-left: 300px;
+        }
+    </style>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<!-- <script src="https://cdn.bootcss.com/html2canvas/0.5.0-beta4/html2canvas.min.js"></script> -->
+<!-- <script src="https://cdn.bootcss.com/html2canvas/0.4.1/html2canvas.js"></script> -->
+<script src="./html2canvas.js"></script>
+<script src="./canvas2image.js"></script>
+</head>
+<body>
+    <div id="myShare">
+        <!-- <div class="tc-content" id="tc-content">
+            <div class="tc-head">
+                <img src="./head02.jpg" alt="" >
+            </div>
+            <h3>疯狂的合伙人</h3>
+            <p>18912341234</p>
+            <div class="tc-code">
+                <img src="./code_03.jpg" alt="">
+            </div>
+            <b>【体验卡】49元大牛卡</b>
+            <span>点击右上角完成分享</span>
+            <div class="bjhead">
+                <img src="./timg.jpg" alt="">
+            </div>
+        </div> -->
+    </div>
+    <a id="down_qr" href="#" style="display: none">haha</a>
+    <button id="b">button to get image</button><br>
+    <img id="myIMG" src= ""/> 
+    <canvas id="myCanvas" width="250" height="290"></canvas>          
+</body>
+</html>
+<script>
+    $.ajax({
+        url: "demo.json",//json文件位置
+        type: "GET",//请求方式为get
+        dataType: "json", //返回数据格式为json
+        success: function(data) {//请求成功完成后要执行的方法 
+            //each循环 使用$.each方法遍历返回的数据date
+            $.each(data.first, function(i, item) {
+                var page = `<div class="tc-content" id="tc-content">
+                                <div class="tc-head">
+                                    <img src=${item.heade} alt="" >
+                                </div>
+                                <h3>疯狂的合伙人</h3>
+                                <p>18912341234</p>
+                                <div class="tc-code">
+                                    <img src=${item.code} alt="">
+                                </div>
+                                <b>【体验卡】49元大牛卡</b>
+                                <span>点击右上角完成分享</span>
+                            </div>`
+                $("#myShare").html(page);
+            })
+            var myShare = document.getElementById("myShare");
+            html2canvas(myShare, {
+                scale: window.devicePixelRatio*2,
+                // async:true,
+                // taintTest:true,
+                onrendered: function(canvas) {
+                    var url = canvas.toDataURL("image/png");//图片地址
+                    console.log(url)
+                    document.body.appendChild(canvas);
+                    var img = document.createElement("img");
+                    // img.crossOrigin = "anonymous";
+                    img.src =  url;
+                    // Canvas2Image.saveAsImage(canvas);//利用Canvas2Image插件下载图片
+                    // var imgUri = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream"); // 获取生成的图片的url 　
+                    // var saveLink = document.createElement( 'a');
+                    // 　　 　　         saveLink.href =imgUri;
+                    // 　　　　          saveLink.download = 'logo.png';
+                    // saveLink.click();
+                    // document.body.appendChild(saveLink);
+                },
+                useCORS:true,
+                width: 240,
+                height: 280
+            });
+        }
+    })
+    // var myShare = document.getElementById("myShare");
+    //     html2canvas(myShare, {
+    //         scale: window.devicePixelRatio*2,
+    //         // async:true,
+    //         // taintTest:true,
+    //         onrendered: function(canvas) {
+    //             var url = canvas.toDataURL("image/png");//图片地址
+    //             console.log(url)
+    //             document.body.appendChild(canvas);
+    //             var img = document.createElement("img");
+    //             // img.crossOrigin = "anonymous";
+    //             img.src =  url;
+    //             // Canvas2Image.saveAsImage(canvas);//利用Canvas2Image插件下载图片
+    //             // var imgUri = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream"); // 获取生成的图片的url 　
+    //             // var saveLink = document.createElement( 'a');
+    //             // 　　 　　         saveLink.href =imgUri;
+    //             // 　　　　          saveLink.download = 'logo.png';
+    //             // saveLink.click();
+    //             // document.body.appendChild(saveLink);
+    //         },
+    //         useCORS:true,
+    //         width: 240,
+    //         height: 280
+    //     });
+</script>

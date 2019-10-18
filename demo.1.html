@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no"/>
+    <meta http-equiv="pragma" content="no-cache"/>
+    <meta http-equiv="expires" content="Wed, 26 Feb 1997 08:21:57 GMT" />
+    <meta http-equiv="Cache-Control" content="no-cache,must-revalidate" />
+    <meta name="format-detection" content="telephone=no"/>
+    <script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #myShare .tc-content{
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            width: 8rem;
+            height: 9.36rem;
+            background: #fff;
+            overflow: hidden;
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+        #myShare .tc-head{
+            width: 1.6rem;
+            height: 1.6rem;
+            border-radius: 50%;
+            overflow: hidden;
+            /* background: #f2f2f2; */
+            position: absolute;
+            left: 50%;
+            margin-left: -0.8rem;
+            top: 0.3rem;
+        }
+        #myShare .tc-head img{
+            width: 100%;
+            height: 100%;
+        }
+        #myShare .tc-content h3{
+            font-size: 0.45rem;
+            color: #323232;
+            margin-top: 2rem;
+            margin-bottom: 0.2rem;
+        }
+        #myShare .tc-content p{
+            font-size: 0.25rem;
+            color: #5c5b5a; 
+        }
+        #myShare .tc-content .tc-code{
+            width: 3rem;
+            height: 3rem;
+            background: #bf7839;
+            margin-top: 0.7rem;
+            margin-bottom: 0.3rem;
+        }
+        #myShare .tc-content .tc-code img{
+            width: 100%;
+            height: 100%;
+        }
+        #myShare .tc-content b{
+            font-size: 0.45rem;
+            color: #414141; 
+        }
+        #myShare .tc-content span{
+            font-size: 0.45rem;
+            color: #e41c1c;
+        }
+        /* #myShare .tc-content .bjhead{
+            width: 8rem;
+            height: 9.36rem;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: url(./images/timg.jpg) no-repeat;
+            z-index: -666;
+        } */
+        #myShare .tc-content .bjhead{
+            width: 8rem;
+            height: 9.36rem;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -666;
+        }
+        #myShare .tc-content .bjhead img{
+            width: 100%;
+            height: 100%;
+        }
+        /* canvas{                
+            margin-top: 282px;
+            margin-right: 0;
+            margin-left: 0;
+        } */
+        button#b {
+            margin-left: 300px;
+        }
+    </style>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
+<!-- <script src="https://cdn.bootcss.com/html2canvas/0.4.1/html2canvas.js"></script> -->
+<!-- <script src="./html2canvas.js"></script> -->
+</head>
+<body>
+    <div id="myShare">
+        <div class="tc-content" id="tc-content">
+            <div class="tc-head">
+                <img src="./images/head02.jpg" alt="">
+            </div>
+            <h3>疯狂的合伙人</h3>
+            <p>18912341234</p>
+            <div class="tc-code">
+                <img src="./images/code_03.jpg" alt="">
+            </div>
+            <b>【体验卡】49元大牛卡</b>
+            <span>点击右上角完成分享</span>
+            <div class="bjhead">
+                <img src="./images/back_identity_2.png" alt="">
+            </div>
+        </div>
+    </div>
+    <a id="down_qr" href="#" style="display: none">haha</a>
+    <button id="b">button to get image</button><br>
+    <img id="myIMG" src= ""/> 
+    <canvas id="myCanvas" width="250" height="290"></canvas>          
+</body>
+</html>
+<script>
+    // jQuery.support.cors = true;
+
+    //将图片转为base64
+    // function getBase64Image(img) {
+    //     img.crossOrigin = 'Anonymous';
+    //     var canvas = document.createElement("canvas");
+    //     canvas.width = img.width;
+    //     canvas.height = img.height;
+    //     var ctx = canvas.getContext("2d");
+    //     ctx.drawImage(img, 0, 0, img.width, img.height);
+    //     var ext = img.src.substring(img.src.lastIndexOf(".")+1).toLowerCase();
+    //     var dataURL = canvas.toDataURL("image/"+ext);
+    //     console.log(dataURL);
+    //     return dataURL;
+    // }
+    // var s = 0;
+    // image2base64(s);
+    //递归将处理每一张图片
+    // function image2base64(s) {
+    //     var image = new Image();
+    //     image.crossOrigin = "";
+    //     image.onload = function() {
+    //         image.src = $("#myShare img").eq(s).attr('src');
+    //         var base64 = getBase64Image(image);
+    //         $(".share_b img").eq(s).attr('src', base64);
+    //         console.log(dataURL);
+    //         s++;
+    //         if (s < $("#myShare img").length) {
+    //             image2base64();
+    //         }
+    //     }
+    // }
+    (function(global){
+        function remChange(){
+            document.documentElement.style.fontSize=20*document.documentElement.clientWidth/360+'px';
+        }
+        remChange();
+        global.addEventListener('resize',remChange,false);
+    })(window);
+    window.onload = function(){
+        html2canvas(document.getElementById("myShare"), {
+            useCORS:true,
+            scale: window.devicePixelRatio*2,
+            async:true,
+            allowTaint:false,
+            taintTest:true,
+            allowTaint:false,
+            onrendered: function(canvas) {
+                var url = canvas.toDataURL();//图片地址
+                document.body.appendChild(canvas);
+            },
+            width: 300,
+            height: 300
+        });
+    }     
+    
+// var canvas2 = document.createElement("canvas");
+//     let _canvas = document.querySelector('div');
+//     var w = parseInt(window.getComputedStyle(_canvas).width);
+//     var h = parseInt(window.getComputedStyle(_canvas).height);
+//     //将canvas画布放大若干倍，然后盛放在较小的容器内，就显得不模糊了
+//     canvas2.width = w * 2;
+//     canvas2.height = h * 2;
+//     canvas2.style.width = w + "px";
+//     canvas2.style.height = h + "px";
+//     //可以按照自己的需求，对context的参数修改,translate指的是偏移量
+//     //  var context = canvas.getContext("2d");
+//     //  context.translate(0,0);
+//     var context = canvas2.getContext("2d");
+//     context.scale(2, 2);
+//     html2canvas(document.querySelector('div'), { canvas: canvas2,logging: false,useCORS:true,taintTest:true,backgroundColor: 'transparent' }).then(function(canvas) {
+//         //document.body.appendChild(canvas);
+//         //canvas转换成url，然后利用a标签的download属性，直接下载，绕过上传服务器再下载
+//         document.querySelector(".down").setAttribute('href', canvas.toDataURL());
+//     });
+    // var pic;
+    // var canvas2 = document.createElement("canvas");
+    // let _canvas = document.querySelector('.test');
+    // var w = parseInt(window.getComputedStyle(_canvas).width);
+    // var h = parseInt(window.getComputedStyle(_canvas).height);
+    // //将canvas画布放大若干倍，然后盛放在较小的容器内，就显得不模糊了
+    // canvas2.width = w * 2;
+    // canvas2.height = h * 2;
+    // canvas2.style.width = w + "px";
+    // canvas2.style.height = h + "px";
+    // //可以按照自己的需求，对context的参数修改,translate指的是偏移量   
+    // var context = canvas2.getContext("2d");
+    // context.scale(2,2);
+    //  html2canvas(document.querySelector('.test'),{canvas:canvas2}).then(function(canvas) {            
+    //         pic=canvas;
+    //         //canvas转换成url，然后利用a标签的download属性，直接下载，绕过上传服务器再下载
+    //         document.querySelector(".down").setAttribute('href',canvas.toDataURL());
+    //  });
+    //  //点击的时候把图片复制到下面那个div下
+    //   function copy(){
+    //              document.querySelector(".copy").appendChild(pic);            
+    //         }
+</script>

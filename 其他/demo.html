@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+
+    <script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <style>
+        /* * {
+            margin: 0;
+        }
+        .test {
+            width: 100px;
+            height: 300px;
+            text-align: center;
+            
+            background-color: #87CEEB;
+            display: inline-block;
+            vertical-align: top;
+        }
+        .test img{
+            width: 60px;
+            height: 60px;
+        }
+ 
+        canvas {
+            margin-right: 5px;
+        }
+ 
+ 
+        .down {
+            float: left;
+            margin: 200px 10px;
+        }
+        .down2 {
+            float: left;
+            margin: 40px 30px;
+        } */
+        *{
+                margin: 0;
+                color:#3a3a3a;
+            }
+            #content{
+                padding:10px;
+            }
+
+            .test{
+                width: 322px;
+                height: 496px;
+                text-align: center;
+                border:1px solid #c0c0c0;
+                background:#fff;
+                margin-top: 1px;
+                margin-left: 1px;               
+
+            }
+            canvas{                
+                margin-top: -459px;
+                margin-right: 5px;
+                margin-left: 500px;
+            }
+            .down{
+                float: left;
+                margin: 0px 10px;
+            }
+            .header{
+                border-bottom: 1px solid #c0c0c0;
+                text-align: center;                
+                padding-top: 10px;
+            }
+            .header>div{
+                width: 164px;
+                margin: 0 auto;
+            }
+            .header img{
+                width: 29px;
+                float: left;
+                margin-right: -10px;
+            }
+            .header p{
+                padding-bottom: 12px;
+                padding-top: 7px;
+            }
+            .main{                
+                text-align: center;
+            }
+            .main p:first-child{
+                font-size: 20px;
+                color:#969696;
+                margin-top: 20px;
+                margin-bottom: 20px;
+            }
+            .main p:last-child{
+                margin-top: 20px;
+                margin-bottom: 20px;
+            }
+            .main :last-child .id{
+                color:#e67d2c;
+                display:inline-block;
+                margin-right: 4px;
+
+            }
+            .footer{
+                background:#D7D7D7;
+                text-align: center;                
+                height: 100px;
+                padding-bottom: 10px;
+            }
+             .footer>div>div{
+                float:left;
+            }
+            .footer>div>div.pic{
+                width: 70px;
+                height: 70px;
+                border-radius: 10px;
+                margin: 10px;
+                margin-right: 0;
+                margin-left: 0;
+                background:#fff;
+            }
+            .footer>div{
+              padding: 10px 22px;          
+            }
+            .footer>div>div ul{
+               list-style: none;
+               padding-left: 22px;                
+            }
+            .footer>div>div ul li{
+               margin-top: 5px; 
+               text-align: left;             
+            }
+            .footer>div>div ul li span{
+                display: inline-block;
+               margin-left:15px;              
+            }
+            .copy{
+                clear: both;
+                margin-top: 19px;
+            }
+            .dropdown-submenu {
+            position: relative;
+        }
+        .dropdown-submenu > .dropdown-menu {
+            top: 0;
+            left: 100%;
+            margin-top: -6px;
+            margin-left: -1px;
+            -webkit-border-radius: 0 6px 6px 6px;
+            -moz-border-radius: 0 6px 6px;
+            border-radius: 0 6px 6px 6px;
+        }
+        .dropdown-submenu:hover > .dropdown-menu {
+            display: block;
+        }
+        .dropdown-submenu > a:after {
+            display: block;
+            content: " ";
+            float: right;
+            width: 0;
+            height: 0;
+            border-color: transparent;
+            border-style: solid;
+            border-width: 5px 0 5px 5px;
+            border-left-color: #ccc;
+            margin-top: 5px;
+            margin-right: -10px;
+        }
+        .dropdown-submenu:hover > a:after {
+            border-left-color: #fff;
+        }
+        .dropdown-submenu.pull-left {
+            float: none;
+        }
+        .dropdown-submenu.pull-left > .dropdown-menu {
+            left: -100%;
+            margin-left: 10px;
+            -webkit-border-radius: 6px 0 6px 6px;
+            -moz-border-radius: 6px 0 6px 6px;
+            border-radius: 6px 0 6px 6px;
+        }
+        body {
+				padding-top: 70px;
+			}
+			
+			
+			
+			/*自定义的css*/
+			.dropdown-submenu {
+				position: relative;
+			}
+			
+			.dropdown-submenu>.dropdown-menu {
+				top: 0;
+				left: 100%;
+				margin-top: -6px;
+				margin-left: -1px;
+				-webkit-border-radius: 0 6px 6px 6px;
+				-moz-border-radius: 0 6px 6px;
+				border-radius: 0 6px 6px 6px;
+			}
+			
+			.dropdown-submenu:hover>.dropdown-menu {
+				display: block;
+			}
+			
+			.dropdown-submenu>a:after {
+				display: block;
+				content: " ";
+				float: right;
+				width: 0;
+				height: 0;
+				border-color: transparent;
+				border-style: solid;
+				border-width: 5px 0 5px 5px;
+				border-left-color: #ccc;
+				margin-top: 5px;
+				margin-right: -10px;
+			}
+			
+			.dropdown-submenu:hover>a:after {
+				border-left-color: #fff;
+			}
+			
+			.dropdown-submenu.pull-left {
+				float: none;
+			}
+			
+			.dropdown-submenu.pull-left>.dropdown-menu {
+				left: -100%;
+				margin-left: 10px;
+				-webkit-border-radius: 6px 0 6px 6px;
+				-moz-border-radius: 6px 0 6px 6px;
+				border-radius: 6px 0 6px 6px;
+            }
+            #myShare .tc-head{
+                width: 1.06rem;
+                height: 1.06rem;
+                border-radius: 50%;
+                background: #f2f2f2;
+                position: absolute;
+                left: 50%;
+                margin-left: -.53rem;
+                top: 2.28rem;
+                z-index: 22;
+            }
+            #myShare .tc-head img{
+                width: 100%;
+                height: 100%;
+                border-radius: 50%;
+            }
+            #myShare .tc-content{
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+                width: 250px;
+                height: 290px;
+                background: #fff;
+                /* position: absolute; */
+                /* left: 50%;
+                margin-left: -2.5rem;
+                top: 2.8rem; */
+                overflow: hidden;
+                /* display: none; */
+            }
+
+            #myShare .tc-content h3{
+                font-size: 15px;
+                color: #323232;
+                line-height: 30px;
+                margin-top: 31px;
+                z-index: 22;
+            }
+            #myShare .tc-content p{
+                font-size: 9px;
+                color: #5c5b5a;
+                z-index: 22;
+            }
+            #myShare .tc-content .tc-code{
+                width: 90px;
+                height: 90px;
+                background: #bf7839;
+                margin-top: 40px;
+                margin-bottom: 10px;
+            }
+            #myShare .tc-content .tc-code img{
+                width: 100%;
+                height: 100%;
+            }
+            #myShare .tc-content b{
+                font-size: 15px;
+                color: #414141;
+                line-height: 35px;
+            }
+            #myShare .tc-content span{
+                font-size: 15px;
+                color: #e41c1c;
+            }
+            #myShare .tc-content .bjhead{
+                width: 500px;
+                height: 500px;
+                background: rgba(0,0,0,0.5);
+                background: url(../images/head02.jpg) no-repeat;
+                background-size: 10rem 10rem;
+                border-radius: 50%;
+                position: absolute;
+                left: -50%;
+                top: -140%;
+                filter: blur(10px);
+            }
+    </style>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
+<!-- <script src="./html2canvas.js"></script> -->
+</head>
+<body>
+    <!-- <div class="test">测试
+        <h3>疯狂的合伙人</h3>
+        <p>18912341234</p>
+        <img src="../xm/msty_weixin/src/main/webapp - 副本/resources/images/head01.png" alt="">
+        
+    </div>
+    <div><a class="down" href="" download="downImg">下载</a></div>
+    <div><a class="down2" href="" download="downImg">下载2</a></div> -->
+    
+            <!-- <div id="content">
+                <div class="test">
+                    <div class="header">
+                        <div>
+                            <img src="./timg.jpg" crossorigin="anonymous">
+                            <p>****麻将</p>
+                        </div>
+                    </div>
+                    <div class="main">
+                        <p>长按二维码下载游戏</p>
+                        <img src="./timg.jpg" class="code" style="width:100px;height:100px;" >
+                        <p>绑定推广员ID <span class="id">824996</span>马上领礼包！</p>
+                    </div>
+                    <div class="footer">
+                        <div>
+                            <div class="pic">
+                                <img src="./code_03.jpg" style="width:50px;height:50px;">
+                            </div>
+                            <div>
+                                <ul>
+                                    <li>昵&nbsp;&nbsp;   称：<span>天府雀神</span></li>
+                                    <li>推广ID：<span>824996</span></li>
+                                    <li>微信号：<span>wyscmi007</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>    
+            </div>   -->
+        
+        
+            <!-- <div class="copy">
+            <button onclick="copy()">截图</button>
+            <a class="down" href="" download="downImg">下载</a>
+        
+            </div> -->
+            <!-- <div class="container">
+                    <div class="row">
+                        <h2>Bootstrap 3多级下拉菜单</h2>
+                        <hr>
+                        <div class="dropdown">
+                            <a id="dLabel" role="button" data-toggle="dropdown" class="btn btn-primary" data-target="#"
+                               href="javascript:;">
+                                下拉多级菜单 <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
+                                <li><a href="javascript:;">一级菜单</a></li>
+                                <li><a href="javascript:;">一级菜单</a></li>
+                                <li class="divider"></li>
+                                <li class="dropdown-submenu">
+                                    <a tabindex="-1" href="javascript:;">一级菜单</a>
+                                    <ul class="dropdown-menu">
+                                        <li><a tabindex="-1" href="javascript:;">二级菜单</a></li>
+                                            <li class="divider"></li>
+                                            <li class="dropdown-submenu">
+                                                <a href="javascript:;">二级菜单</a>
+                                                <ul class="dropdown-menu">
+                                                    <li><a href="javascript:;">三级菜单</a></li>
+                                                </ul>
+                                            </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <h2>Bootstrap 3多级下拉菜单</h2>
+                        <h2>Bootstrap 3多级下拉菜单</h2>
+                    </div>
+                </div>   -->
+                <!-- <div id="div_target">
+                    <div class="test">
+                        <div class="header">
+                            <div>
+                                <img src="./timg.jpg" crossorigin="anonymous">
+                                <p>****麻将</p>
+                            </div>
+                        </div>
+                        <div class="main">
+                            <p>长按二维码下载游戏</p>
+                            <img src="./timg.jpg" class="code" style="width:100px;height:100px;" >
+                            <p>绑定推广员ID <span class="id">824996</span>马上领礼包！</p>
+                        </div>
+                        <div class="footer">
+                            <div>
+                                <div class="pic">
+                                    <img src="./code_03.jpg" style="width:50px;height:50px;">
+                                </div>
+                                <div>
+                                    <ul>
+                                        <li>昵&nbsp;&nbsp;   称：<span>天府雀神</span></li>
+                                        <li>推广ID：<span>824996</span></li>
+                                        <li>微信号：<span>wyscmi007</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>  
+                </div> -->
+    <div id="myShare">
+        <div class="tc-head">
+            <img src="./head02.jpg" alt="">
+        </div>
+        <div class="tc-content" id="tc-content">
+            <h3>疯狂的合伙人</h3>
+            <p>18912341234</p>
+            <div class="tc-code">
+                <img src="./code_03.jpg" alt="">
+            </div>
+            <b>【体验卡】49元大牛卡</b>
+            <span>点击右上角完成分享</span>
+            <div class="bjhead"></div>
+        </div>
+    </div>
+    <a id="down_qr" href="#" style="display: none">haha</a>
+    <button id="b">button to get image</button><br>
+    <img id="myIMG" src= "./chart.png"/> 
+    <canvas id="myCanvas" width="250" height="290"></canvas>          
+</body>
+</html>
+<script>
+    html2canvas(document.getElementById("myShare"),{
+        useCORS:true,
+        async:true,
+        allowTaint:false,
+        taintTest:true,
+        allowTaint:false,
+        onrendered: function(canvas) {
+            var imgURL=canvas.toDataURL("image/png");
+            console.log(imgURL);
+            $('#myIMG').attr("src",imgURL);
+            $('#b').on('click',function(){
+                $('#down_qr').attr('download',imgURL);  
+                $('#down_qr').attr('href',imgURL);
+                document.getElementById('down_qr').click();
+            });  
+            var canvas = document.getElementById('myCanvas');
+            var context = canvas.getContext('2d');
+            var img1 = new Image();
+            img1.crossOrigin = 'anonymous';
+            img1.src = imgURL;
+            console.log(img1.src)
+            img1.onload = function(){
+                context.drawImage(img1,10,10,250,290)
+            }
+            var img2 = new Image();
+            
+            img2.crossOrigin = 'anonymous';
+            img2.src = "./code_03.jpg";
+            console.log(img2.src)
+            img2.onload = function(){
+                context.drawImage(img2,0,0,90,90)
+            }
+        }
+    });
+// var canvas2 = document.createElement("canvas");
+//     let _canvas = document.querySelector('div');
+//     var w = parseInt(window.getComputedStyle(_canvas).width);
+//     var h = parseInt(window.getComputedStyle(_canvas).height);
+//     //将canvas画布放大若干倍，然后盛放在较小的容器内，就显得不模糊了
+//     canvas2.width = w * 2;
+//     canvas2.height = h * 2;
+//     canvas2.style.width = w + "px";
+//     canvas2.style.height = h + "px";
+//     //可以按照自己的需求，对context的参数修改,translate指的是偏移量
+//     //  var context = canvas.getContext("2d");
+//     //  context.translate(0,0);
+//     var context = canvas2.getContext("2d");
+//     context.scale(2, 2);
+//     html2canvas(document.querySelector('div'), { canvas: canvas2,logging: false,useCORS:true,taintTest:true,backgroundColor: 'transparent' }).then(function(canvas) {
+//         //document.body.appendChild(canvas);
+//         //canvas转换成url，然后利用a标签的download属性，直接下载，绕过上传服务器再下载
+//         document.querySelector(".down").setAttribute('href', canvas.toDataURL());
+//     });
+    // var pic;
+    // var canvas2 = document.createElement("canvas");
+    // let _canvas = document.querySelector('.test');
+    // var w = parseInt(window.getComputedStyle(_canvas).width);
+    // var h = parseInt(window.getComputedStyle(_canvas).height);
+    // //将canvas画布放大若干倍，然后盛放在较小的容器内，就显得不模糊了
+    // canvas2.width = w * 2;
+    // canvas2.height = h * 2;
+    // canvas2.style.width = w + "px";
+    // canvas2.style.height = h + "px";
+    // //可以按照自己的需求，对context的参数修改,translate指的是偏移量   
+    // var context = canvas2.getContext("2d");
+    // context.scale(2,2);
+    //  html2canvas(document.querySelector('.test'),{canvas:canvas2}).then(function(canvas) {            
+    //         pic=canvas;
+    //         //canvas转换成url，然后利用a标签的download属性，直接下载，绕过上传服务器再下载
+    //         document.querySelector(".down").setAttribute('href',canvas.toDataURL());
+    //  });
+    //  //点击的时候把图片复制到下面那个div下
+    //   function copy(){
+    //              document.querySelector(".copy").appendChild(pic);            
+    //         }
+</script>

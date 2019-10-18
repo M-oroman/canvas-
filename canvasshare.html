@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Canvas海报</title>
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+</style>
+<body>
+    <img src="./images/timg.jpg" id="daiyan_bg" alt="">
+    <canvas id="myCanvas"></canvas>
+    <canvas width="320" height="180" style="width:160px;height:90px;"></canvas>
+</body>
+</html>
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+<script>
+    //本地demo
+    var pointMsg = "疯狂的合伙人" //$(".pointtxt").val(),     
+        details_text = "【体验卡】49元大牛卡", //$(".daiyan_msg").html(); 
+        phone_text = "13666668888",  
+        share_text = "点击右上角完成分享",  
+        imgbox = document.getElementById("daiyan_bg"),
+        canvas = document.getElementById("myCanvas"),
+        ctx = canvas.getContext("2d"), //getContext("2d") 对象是内建的 HTML5 对象，拥有多种绘制路径、矩形、圆形、字符以及添加图像的方法。
+        imgUrl = new Image,
+        qrCodeUrl = new Image,
+        point = new Image;
+    canvas.width = 240;            
+    canvas.height = 290;
+    // imgUrl.crossOrigin = "anonymous";
+    imgUrl.src = imgbox.src;
+    qrCodeUrl.src = "./images/code_03.jpg";
+    point.src = "./images/head02.jpg";        
+    imgUrl.onload = function () {
+        setTimeout(function(){
+            ctx.fillStyle = "#000"; //填充颜色
+            ctx.fillRect(0, 0, canvas.width, canvas.height); //绘制"被填充"的矩形
+            // ctx.translate(-2,0);
+            var pTxtCenter = canvas.width/2;
+            // 绘制背景图
+            ctx.drawImage(imgUrl, 0, 0, 240, 290);
+            // 绘制圆形头像
+            ctx.beginPath();//起始一条路径，或重置当前路径
+            ctx.save();//保存当前环境的状态
+            ctx.arc(pTxtCenter,34,24,0,Math.PI*2,true);//创建弧/曲线（用于创建圆形或部分圆）
+            ctx.clip();//从原始画布剪切任意形状和尺寸的区域
+            ctx.createPattern(point,"no-repeat");//在指定的方向上重复指定的元素
+            ctx.drawImage(point,pTxtCenter-24,10, 48, 48);//按指定大小绘制 所要绘制的图像 xy坐标 宽高
+            ctx.restore();//返回之前保存过的路径状态和属性
+            // 二维码;
+            ctx.beginPath();
+            ctx.drawImage(qrCodeUrl, pTxtCenter-45,120, 90, 90);
+            // 昵称;
+            if (
+                ctx.beginPath(), 
+                ctx.font = "600 18px PingFangSC-Medium", 
+                ctx.textBaseline = "hanging") //设置或返回在绘制文本时使用的当前文本基线
+            {
+                var pTxt = pointMsg;
+                if( pTxt.length > 10 ){
+                    pTxt = pTxt.substring(0, 10) + "...";
+                }
+                ctx.textAlign="center";
+                ctx.fillText(pTxt, pTxtCenter, 65);
+                
+            }
+            // 手机号
+            if (ctx.beginPath(), ctx.font = "normal 14px PingFangSC-Medium") {
+                ctx.textAlign="center";
+                ctx.fillText(phone_text, pTxtCenter, 90);
+            }
+            // 套餐详情
+            if (
+                ctx.beginPath(), 
+                ctx.font = "normal 14px PingFangSC-Medium", 
+                ctx.shadowOffsetX = 0, 
+                ctx.shadowOffsetY = 5, 
+                ctx.shadowColor = "rgba(0, 0, 0, 0.3)", 
+                ctx.shadowBlur = 5) {
+                if( details_text.length > 10 ){
+                    details_text = details_text.substring(0, 10) + "...";
+                }
+                ctx.textAlign="center";
+                ctx.fillText(details_text, pTxtCenter, 224);
+            }
+            // 分享提示
+            if (ctx.beginPath(), ctx.font = "normal 16px PingFangSC-Medium") {
+                ctx.textAlign="center";
+                ctx.fillStyle = "#cc0000";
+                ctx.fillText(share_text, pTxtCenter, 245);
+            }
+            // var url = canvas.toDataURL("image/png");
+            // console.log(url)
+            // var img = document.createElement("img");
+            // img.src =  url;
+            // document.body.appendChild(img);
+        },10)
+        
+                     
+    };
+
+
+    //ajax获取图片
+    // $.ajax({
+    //     url: "./js/demo.json",//json文件位置
+    //     type: "GET",//请求方式为get
+    //     dataType: "json", //返回数据格式为json
+    //     success: function(data) {//请求成功完成后要执行的方法 
+    //         //each循环 使用$.each方法遍历返回的数据date
+    //         $.each(data.first, function(i, item) {
+    //             var pointMsg = "疯狂的合伙人" //$(".pointtxt").val(),     
+    //             details_text = "【体验卡】49元大牛卡", //$(".daiyan_msg").html(); 
+    //             phone_text = "13666668888",  
+    //             share_text = "点击右上角完成分享",  
+    //             imgbox = document.getElementById("daiyan_bg"),
+    //             canvas = document.getElementById("myCanvas"),
+    //             ctx = canvas.getContext("2d"), //getContext("2d") 对象是内建的 HTML5 对象，拥有多种绘制路径、矩形、圆形、字符以及添加图像的方法。
+    //             imgUrl = new Image,
+    //             qrCodeUrl = new Image,
+    //             point = new Image;
+    //             canvas.width = 240;            
+    //             canvas.height = 290;
+    //             imgUrl.crossOrigin = "anonymous";
+    //             qrCodeUrl.crossOrigin = "anonymous";
+    //             point.crossOrigin = "anonymous";
+    //             imgUrl.src = imgbox.src;
+    //             qrCodeUrl.src = "code_03.jpg";
+    //             point.src = "head02.jpg";   
+    //             imgUrl.onload = function () {
+    //                 setTimeout(function(){
+    //                     ctx.fillStyle = "#000"; //填充颜色
+    //                     ctx.fillRect(0, 0, 240, 290); //绘制"被填充"的矩形
+    //                     // ctx.translate(-2,0);
+    //                     var pTxtCenter = canvas.width/2;
+    //                     // 绘制背景图
+    //                     ctx.drawImage(imgUrl, 0, 0, 240, 290);
+    //                     // 画圆绘制头像
+    //                     ctx.beginPath();
+    //                     ctx.save();
+    //                     ctx.arc(pTxtCenter,34,24,0,Math.PI*2,true);
+    //                     ctx.clip();
+    //                     ctx.createPattern(point,"no-repeat");
+    //                     ctx.drawImage(point,pTxtCenter-24,10, 48, 48);//按指定大小绘制 所要绘制的图像 xy坐标 宽高
+    //                     ctx.restore();
+    //                     // 二维码;
+    //                     ctx.beginPath();
+    //                     ctx.drawImage(qrCodeUrl, pTxtCenter-45,120, 90, 90);
+    //                     if (
+    //                         ctx.beginPath(), 
+    //                         ctx.font = "600 18px PingFangSC-Medium", 
+    //                         ctx.textBaseline = "hanging")
+    //                     {
+    //                         // 昵称;
+    //                         var pTxt = pointMsg;
+    //                         if( pTxt.length > 10 ){
+    //                             pTxt = pTxt.substring(0, 10) + "...";
+    //                         }
+    //                         ctx.textAlign="center";
+    //                         ctx.fillText(pTxt, pTxtCenter, 65);
+                            
+    //                     }
+                        
+    //                     // 手机号
+    //                     if (ctx.beginPath(), ctx.font = "normal 14px PingFangSC-Medium") {
+    //                         ctx.textAlign="center";
+    //                         ctx.fillText(phone_text, pTxtCenter, 90);
+    //                     }
+    //                     // 套餐详情
+    //                     if (ctx.beginPath(), ctx.font = "normal 14px PingFangSC-Medium", ctx.shadowOffsetX = 0, ctx.shadowOffsetY = 5, ctx.shadowColor = "rgba(0, 0, 0, 0.3)", ctx.shadowBlur = 5) {
+    //                         if( details_text.length > 10 ){
+    //                             details_text = details_text.substring(0, 10) + "...";
+    //                         }
+    //                         ctx.textAlign="center";
+    //                         ctx.fillText(details_text, pTxtCenter, 224);
+    //                     }
+    //                     // 分享提示
+    //                     if (ctx.beginPath(), ctx.font = "normal 16px PingFangSC-Medium") {
+    //                         ctx.textAlign="center";
+    //                         ctx.fillStyle = "#cc0000";
+    //                         ctx.fillText(share_text, pTxtCenter, 245);
+    //                     }
+    //                 },10)
+    //             };
+    //         })
+    //     }
+    // })
+</script>
